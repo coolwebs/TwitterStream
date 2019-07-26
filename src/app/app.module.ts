@@ -4,7 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// Material Design Modules
+// Import remote data feed
+import { HttpClientModule } from '@angular/common/http';
+
+// Material Design Modules for tabbed display
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -19,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     MatToolbarModule,
     MatTabsModule,
     MatInputModule,

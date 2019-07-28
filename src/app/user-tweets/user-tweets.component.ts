@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { of as observableOf } from 'rxjs';
 import { DataSource } from '@angular/cdk/collections';
 import { Users } from '../models/users.model';
-// import { UserDataSource } from '../hashtag-tweets/hashtag-tweets.component';
 
 @Component({
   selector: 'app-user-tweets',

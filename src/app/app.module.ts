@@ -22,14 +22,16 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HashtagTweetsComponent } from './hashtag-tweets/hashtag-tweets.component';
 import { UserTweetsComponent } from './user-tweets/user-tweets.component';
 
-// Twitter API data services
+// Twitter API data services and customize display
 import { TwitterdataService } from './services/twitterdata.service';
+import { EllipsisPipe } from './pipes/ellipsis.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HashtagTweetsComponent,
-    UserTweetsComponent
+    UserTweetsComponent,
+    EllipsisPipe
   ],
   imports: [
     BrowserModule,

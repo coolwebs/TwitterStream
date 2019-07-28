@@ -7,13 +7,14 @@ import { AppComponent } from './app.component';
 // Import remote data feed
 import { HttpClientModule } from '@angular/common/http';
 
-// Material Design Modules for tabbed display
+// Material Design Modules for the display
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 // Components for tabbed display of tweets
 import { HashtagTweetsComponent } from './hashtag-tweets/hashtag-tweets.component';
@@ -37,6 +38,7 @@ import { TwitterdataService } from './services/twitterdata.service';
     MatInputModule,
     MatCardModule,
     MatTableModule,
+    MatPaginatorModule,
     BrowserAnimationsModule
   ],
   providers: [TwitterdataService],

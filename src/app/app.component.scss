@@ -1,0 +1,9 @@
+.page-wrapper {
+  padding: 20px;
+  app-hashtag-tweets {
+    .mat-card {
+      // <todo> so strange that scss rule below does not work
+      background-color: #eee;
+    }
+  }
+}

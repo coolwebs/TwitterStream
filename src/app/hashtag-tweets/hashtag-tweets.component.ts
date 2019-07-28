@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { TwitterdataService } from '../services/twitterdata.service';
 import { Observable } from 'rxjs';
-import { of as observableOf } from 'rxjs';
-import { DataSource } from '@angular/cdk/collections';
-import { Hashtags } from '../models/hashtags.model';
+import { Users } from '../models/users.model';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-hashtag-tweets',
@@ -11,23 +10,26 @@ import { Hashtags } from '../models/hashtags.model';
   styleUrls: ['./hashtag-tweets.component.sass']
 })
 export class HashtagTweetsComponent implements OnInit {
-    dataSource = new UserDataSource(this.twitterdataService);
+
+    dataSource = new MatTableDataSource<Users>();
     displayedColumns = ['text', 'likes', 'replies', 'retweets', 'hashtags', 'date'];
 
-    constructor(private twitterdataService: TwitterdataService) {
+    length = 50;
+    pageSize = 10;
+    pageSizeOptions = [5, 10, 20];
+
+    @ViewChild( MatPaginator ) paginator: MatPaginator;
+
+    constructor( private twitterdataService: TwitterdataService ) {
     }
 
     ngOnInit() {
+        this.twitterdataService.getTweetsByHashtag().subscribe(
+            data => this.dataSource.data = data
+        );
     }
-}
 
-    export class UserDataSource extends DataSource<any> {
-    constructor( private twitterdataService: TwitterdataService ) {
-        super();
+    ngAfterViewInit(): void {
+        this.dataSource.paginator = this.paginator;
     }
-    connect(): Observable<Hashtags[]> {
-        return this.twitterdataService.getTweetsByHashtag();
-}
-    disconnect() {}
-
 }

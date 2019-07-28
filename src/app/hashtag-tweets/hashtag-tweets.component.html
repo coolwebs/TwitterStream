@@ -1,0 +1,36 @@
+<mat-card>
+  <div class="search-container">
+    <mat-form-field>
+      <input matInput placeholder="Search by hashtag">
+    </mat-form-field>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="tweet">
+      <th mat-header-cell *matHeaderCellDef> Tweet </th>
+      <td mat-cell> Tweet details </td>
+    </ng-container>
+    <ng-container matColumnDef="likes">
+      <th mat-header-cell *matHeaderCellDef> Likes </th>
+      <td mat-cell> Likes </td>
+    </ng-container>
+    <ng-container matColumnDef="replies">
+      <th mat-header-cell *matHeaderCellDef> Replies </th>
+      <td mat-cell> Replies </td>
+    </ng-container>
+    <ng-container matColumnDef="retweets">
+      <th mat-header-cell *matHeaderCellDef> Retweets </th>
+      <td mat-cell> Retweets </td>
+    </ng-container>
+    <ng-container matColumnDef="hashtags">
+      <th mat-header-cell *matHeaderCellDef> Hashtags </th>
+      <td mat-cell> Hashtags </td>
+    </ng-container>
+    <ng-container matColumnDef="tweetDate">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell> Date </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-card>

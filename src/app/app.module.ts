@@ -19,6 +19,9 @@ import { MatTableModule } from '@angular/material/table';
 import { HashtagTweetsComponent } from './hashtag-tweets/hashtag-tweets.component';
 import { UserTweetsComponent } from './user-tweets/user-tweets.component';
 
+// Twitter API data services
+import { TwitterdataService } from './services/twitterdata.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +39,7 @@ import { UserTweetsComponent } from './user-tweets/user-tweets.component';
     MatTableModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [TwitterdataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

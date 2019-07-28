@@ -1,10 +1,18 @@
 <mat-card>
-  <div class="search-container">
+
+  <!--Search input field to filter table data-->
+  <div class="search-container" style="direction: rtl;">
     <mat-form-field>
       <input matInput placeholder="Search by user">
     </mat-form-field>
   </div>
 
+  <!--display loading spinner whilst data loads-->
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!--Table populated by twitter hashtags API feed-->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="text">
       <th mat-header-cell *matHeaderCellDef> Tweet </th>
@@ -34,3 +42,11 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </mat-card>
+
+<!--Table pagination-->
+<mat-paginator
+        [length]="length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [showFirstLastButtons]="yes">
+</mat-paginator>

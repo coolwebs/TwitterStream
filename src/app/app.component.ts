@@ -9,8 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit {
   title = 'twitterstream';
 
-    constructor(private http: HttpClient) {}
+    constructor( private http: HttpClient ) {}
 
-    ngOnInit() {
-        });
+    ngOnInit() {};
 }

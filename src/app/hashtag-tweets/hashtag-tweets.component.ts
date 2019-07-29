@@ -13,6 +13,7 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 export class HashtagTweetsComponent implements OnInit {
 
     dataSource = new MatTableDataSource<Users>();
+    isLoading = true; // for table data preloader
     displayedColumns = ['text', 'likes', 'replies', 'retweets', 'hashtags', 'date'];
 
     // Setup pagination attr
@@ -40,7 +41,11 @@ export class HashtagTweetsComponent implements OnInit {
         // Query the api using the data service and pull it into dataSource for Mat table
         // Give the default hashtag to display tweets from on first view
         this.twitterdataService.getTweetsByHashtag('Python').subscribe(
-            data => this.dataSource.data = data
+            data => {
+                this.isLoading = false;
+                this.dataSource.data = data
+            },
+            error => this.isLoading = false
         );
 
         // Listen to the user input on search field and update results

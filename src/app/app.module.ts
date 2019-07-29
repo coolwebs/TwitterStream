@@ -23,16 +23,18 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HashtagTweetsComponent } from './hashtag-tweets/hashtag-tweets.component';
 import { UserTweetsComponent } from './user-tweets/user-tweets.component';
 
-// Twitter API data services and customize display
+// Twitter API data services and custom pipes
 import { TwitterdataService } from './services/twitterdata.service';
 import { EllipsisPipe } from './pipes/ellipsis.pipe';
+import { ExactSearchPipe } from './pipes/exact-search.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HashtagTweetsComponent,
     UserTweetsComponent,
-    EllipsisPipe
+    EllipsisPipe,
+    ExactSearchPipe
   ],
   imports: [
     BrowserModule,

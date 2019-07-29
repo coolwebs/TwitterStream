@@ -1,7 +1,8 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { TwitterdataService } from '../services/twitterdata.service';
-import { Observable } from 'rxjs';
 import { Users } from '../models/users.model';
+import { Observable, of, fromEvent } from 'rxjs';
+import { debounceTime, map, distinctUntilChanged, filter } from 'rxjs/internal/operators';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
@@ -18,8 +19,12 @@ export class HashtagTweetsComponent implements OnInit {
     length = 50;
     pageSize = 10;
     pageSizeOptions = [5, 10, 20];
-
     @ViewChild( MatPaginator ) paginator: MatPaginator;
+
+    // Setup element reference for the search field
+    @ViewChild('hashtagsSearchInput') hashtagsSearchInput: ElementRef;
+    apiResponse:any;
+    isSearching:boolean;
 
     // Trim and reformat date string (unfortunately not already a date object to start with)
     convertDate(rawDate: string): string {
@@ -32,12 +37,39 @@ export class HashtagTweetsComponent implements OnInit {
     }
 
     ngOnInit() {
+        // Query the api using the data service and pull it into dataSource for Mat table
         this.twitterdataService.getTweetsByHashtag().subscribe(
             data => this.dataSource.data = data
         );
-    }
 
-    ngAfterViewInit(): void {
-        this.dataSource.paginator = this.paginator;
+        // Listen to the user input on search field and update results
+        fromEvent(this.hashtagsSearchInput.nativeElement, 'keyup').pipe(
+            // get value
+            map((event: any) => {
+                return event.target.value;
+            })
+            // if character length greater then 2
+            ,filter(res => res.length > 2)
+            // Time in milliseconds between key events (wait until run search)
+            ,debounceTime(1000)
+            // If previous query is diffent from current
+            ,distinctUntilChanged()
+            // subscription for response
+        ).subscribe((text: string) => {
+            this.isSearching = true;
+            this.twitterdataService.getTweetsByHashtag().subscribe(
+                data => this.dataSource.data = data
+            );
+                this.isSearching = false;
+                // this.apiResponse = res;
+            },(err)=>{
+                this.isSearching = false;
+                console.log('error',err);
+            });
+        }
+
+        ngAfterViewInit(): void {
+            // Add the MatTable paginator after view init
+            this.dataSource.paginator = this.paginator;
+        }
     }
-}

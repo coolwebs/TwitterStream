@@ -4,7 +4,7 @@
   <div class="search-container" style="direction: rtl;">
     <mat-form-field>
       <mat-icon matPrefix aria-hidden="false" aria-label="Search">search</mat-icon>
-      <input matInput placeholder="Search by user">
+      <input matInput placeholder="Search by user" [(ngModel)]="myCustomUser">
     </mat-form-field>
   </div>
 
@@ -55,8 +55,8 @@
 
 <!--Table pagination-->
 <mat-paginator
-        [length]="length"
-        [pageSize]="pageSize"
-        [pageSizeOptions]="pageSizeOptions"
-        [showFirstLastButtons]="yes">
+  [length]="length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  [showFirstLastButtons]="yes">
 </mat-paginator>

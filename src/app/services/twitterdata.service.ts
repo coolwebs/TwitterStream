@@ -12,8 +12,8 @@ export class TwitterdataService {
     private myCustomUser:string = 'Twitter';
 
     // Load JSON APIs via HttpClient and set them up with obervables (models)
-    private hashtagsUrl:string = 'https://am-twitter-scrape.herokuapp.com/hashtags/Python?pages_limit=3&wait=0';
-    private usersUrl:string = `http://am-twitter-scrape.herokuapp.com/users/Twitter?pages_limit=3&wait=0`;
+    private hashtagsUrl:string = `https://am-twitter-scrape.herokuapp.com/hashtags/${this.myCustomHashtag}?pages_limit=3&wait=0`;
+    private usersUrl:string = `http://am-twitter-scrape.herokuapp.com/users/${this.myCustomUser}?pages_limit=3&wait=0`;
 
     constructor( private http: HttpClient ) { }
 

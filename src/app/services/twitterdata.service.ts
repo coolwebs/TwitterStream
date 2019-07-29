@@ -6,24 +6,20 @@ import { Users } from '../models/users.model';
 @Injectable()
 export class TwitterdataService {
 
-    // setup custom placeholder vars that will be binded to search input field
-    // They will modify the declared JSON APIs below
-    private myCustomHashtag:string = 'Python';
-    private myCustomUser:string = 'Twitter';
-
-    // Load JSON APIs via HttpClient and set them up with obervables (models)
-    private hashtagsUrl:string = `https://am-twitter-scrape.herokuapp.com/hashtags/${this.myCustomHashtag}?pages_limit=3&wait=0`;
-    private usersUrl:string = `http://am-twitter-scrape.herokuapp.com/users/${this.myCustomUser}?pages_limit=3&wait=0`;
-
     constructor( private http: HttpClient ) { }
 
+    // Setup functions to load API requests to const vars.
+    // Then setup placeholders to read values input from user on front end and rerun api query
+
     // Retrieve JSON API (hashtags), using template model
-    getTweetsByHashtag(): Observable<Users[]> {
-        return this.http.get<Users[]>(this.hashtagsUrl);
+    getTweetsByHashtag(hashtag: string): Observable<Users[]> {
+        const hashUrl = `https://am-twitter-scrape.herokuapp.com/hashtags/${hashtag}?pages_limit=3&wait=0`;
+        return this.http.get<Users[]>(hashUrl);
     }
 
     // Retrieve JSON API (Users), using template model
-    getTweetsByUsers(): Observable<Users[]> {
-        return this.http.get<Users[]>(this.usersUrl);
+    getTweetsByUsers(username: string): Observable<Users[]> {
+        const userUrl = `http://am-twitter-scrape.herokuapp.com/users/${username}?pages_limit=3&wait=0`;
+        return this.http.get<Users[]>(userUrl);
     }
 }

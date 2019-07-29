@@ -23,7 +23,6 @@ export class HashtagTweetsComponent implements OnInit {
 
     // Setup element reference for the search field
     @ViewChild('hashtagsSearchInput') hashtagsSearchInput: ElementRef;
-    apiResponse:any;
     isSearching:boolean;
 
     // Trim and reformat date string (unfortunately not already a date object to start with)
@@ -37,8 +36,10 @@ export class HashtagTweetsComponent implements OnInit {
     }
 
     ngOnInit() {
+
         // Query the api using the data service and pull it into dataSource for Mat table
-        this.twitterdataService.getTweetsByHashtag().subscribe(
+        // Give the default hashtag to display tweets from on first view
+        this.twitterdataService.getTweetsByHashtag('Python').subscribe(
             data => this.dataSource.data = data
         );
 
@@ -55,13 +56,17 @@ export class HashtagTweetsComponent implements OnInit {
             // If previous query is diffent from current
             ,distinctUntilChanged()
             // subscription for response
-        ).subscribe((text: string) => {
+        ).subscribe((hashtag: string) => {
             this.isSearching = true;
-            this.twitterdataService.getTweetsByHashtag().subscribe(
-                data => this.dataSource.data = data
+            // console.log(hashtag);
+            // If user input change is success, query the api again with user input value
+            this.twitterdataService.getTweetsByHashtag(hashtag).subscribe(
+                data => {
+                    console.log(data);
+                    this.dataSource.data = data;
+                }
             );
                 this.isSearching = false;
-                // this.apiResponse = res;
             },(err)=>{
                 this.isSearching = false;
                 console.log('error',err);

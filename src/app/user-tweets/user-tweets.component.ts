@@ -63,17 +63,17 @@ export class UserTweetsComponent implements OnInit {
           // subscription for response
       ).subscribe((username: string) => {
           this.isSearching = true;
-          console.log(username);
+          // console.log(username);
           this.twitterdataService.getTweetsByUsers(username).subscribe(
               data => {
-                  console.log(data);
+                  // console.log(data);
                   this.dataSource.data = data;
               }
           );
           this.isSearching = false;
       },(err)=>{
           this.isSearching = false;
-          console.log('error',err);
+          // console.log('error',err);
       });
   }
 

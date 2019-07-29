@@ -3,6 +3,6 @@ export interface Users {
     likes: number;
     replies: number;
     retweets: number;
-    hashtags: string;
-    date: string;
+    hashtags: object;
+    date: Date;
 }

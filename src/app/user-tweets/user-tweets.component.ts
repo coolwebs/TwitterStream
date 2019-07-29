@@ -14,11 +14,19 @@ export class UserTweetsComponent implements OnInit {
     dataSource = new MatTableDataSource<Users>();
     displayedColumns = ['text', 'likes', 'replies', 'retweets', 'hashtags', 'date'];
 
+    // Setup pagination attr
     length = 50;
     pageSize = 10;
     pageSizeOptions = [5, 10, 20];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
+
+    // Trim and reformat date string (unfortunately not already a date object to start with)
+    convertDate(rawDate: string): string {
+        const dateOnly = rawDate.split('-')[1].trim();
+        const [day, month, year] = dateOnly.split(' ');
+        return `${month} ${day}, ${year}`;
+    }
 
     constructor( private twitterdataService: TwitterdataService ) {
     }

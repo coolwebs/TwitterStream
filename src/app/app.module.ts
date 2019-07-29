@@ -26,13 +26,15 @@ import { UserTweetsComponent } from './user-tweets/user-tweets.component';
 // Twitter API data services and customize display
 import { TwitterdataService } from './services/twitterdata.service';
 import { EllipsisPipe } from './pipes/ellipsis.pipe';
+import { ExactSearchPipe } from './pipes/exact-search.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HashtagTweetsComponent,
     UserTweetsComponent,
-    EllipsisPipe
+    EllipsisPipe,
+    ExactSearchPipe
   ],
   imports: [
     BrowserModule,

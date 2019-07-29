@@ -67,14 +67,14 @@ export class HashtagTweetsComponent implements OnInit {
             // If user input change is success, query the api again with user input value
             this.twitterdataService.getTweetsByHashtag(hashtag).subscribe(
                 data => {
-                    console.log(data);
+                    // console.log(data);
                     this.dataSource.data = data;
                 }
             );
                 this.isSearching = false;
             },(err)=>{
                 this.isSearching = false;
-                console.log('error',err);
+                // console.log('error',err);
             });
         }
 
